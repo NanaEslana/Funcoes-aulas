@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funcoes</title>
+</head>
+<body>
+    <script>
+        function calcularpotencia(x= 2 , y = x){
+            console.log(Math.pow(x,y));//Calcular potencia dos numeros.
+   
+        }
+        calcularpotencia(); //  2^2
+        calcularpotencia(3);// 3^3
+        calcularpotencia(2,3);// 2^3
+
+        "__________________________________________"
+        const v = 'valor 1';
+        function funcao (x = v){
+            const v = 'valor 2';
+            console.log(x);
+        }
+
+        funcao();
+
+        "___________________________________________"
+
+        function exibirnome (nome,callback = z =>{ //callback passamos que sera umafuncao anonimo
+            console.log(z) //escopo da funcao
+        }){
+            callback(nome);//incrementacao da funcao
+        }
+
+        exibirnome('Eslana');
+
+        //como podemos garantir que o dev passe o argumentos para o metodo?
+
+        function parametroObridatorios(parametro){
+            throw new Error(`O parametro ${parametro} é obrigatorio. `)//Dispara um erro na tela
+        }
+        function inserirnatela(objeto = parametroObridatorios('objeto')){
+
+        }
+
+        inserirnatela();
+
+        //arguments ele esta disponivel em varias funcoes que são construida em JavaScript
+
+        function somatudo(){
+            let soma = 0;
+            for(let i = 0; i < arguments.length; i++){
+                soma += arguments[i];
+            }
+            console.log(soma);
+        }       
+
+
+        somatudo(1);
+        somatudo(1,2);
+        somatudo(1,2,3);
+
+        //guerra dos arguments = Rest x Arguments
+
+        //Rest nos permite apresentar um numero indefinido dentro de uma array.
+        //ele converte todos os argumentos dentro da função e converte em uma array.
+        //o arguments não e realemente um objeto array,ja o Rets converte para uma array
+
+        function somatudo(...valores){//mostrar uma quantidade indefenida de valores de uma funcao
+            let soma = 0;
+            const qtd = valores.length;
+            for(let i = 0;i <qtd;i ++){
+                 soma += valores[i]
+            }
+            console.log(soma);
+        }
+
+        somatudo(1); //valores[0] = 1;
+        somatudo(1,2); //valores[0]=1; valores[1]=2;
+        somatudo(1,2,3);//valores[0]=1;valores[1]=2;valores[2]=3;
+
+
+        function somatudo(...valores){//mostrar uma quantidade indefenida de valores de uma funcao
+            return valores.reduce((soma,valor) => {
+             return soma + valor;
+            },0);//reduce condensar todos os valores dentro de um so
+        }
+
+        console.log(somatudo(1)); //valores[0] = 1;
+        console.log(somatudo(1,2)); //valores[0]=1; valores[1]=2;
+        console.log(somatudo(1,2,3));//valores[0]=1;valores[1]=2;valores[2]=3;
+
+        /*como o operador rest ultilizar unicamente os ultimos orgumentos passados
+        podemos defirnir vareaveis fora d função,chamamos essa variavel de 
+        parametros fixos.*/
+
+        function multiplicaEsoma(multiplicador, ...valores){
+            return valores.reduce((soma,valor) => {
+                return soma + (valor * multiplicador);
+            ),0}
+        }   
+
+
+console.log(multiplicaEsoma(2,1,2));
+console.log(multiplicaEsoma(2,6,7)) 
+
+    </script>
+</body>
+</html>
